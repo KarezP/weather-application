@@ -1,0 +1,170 @@
+/* General body styles */
+body {
+  background-image: url('bacground.jpg');
+  background-size: cover; /* This ensures the image covers the entire screen */
+  background-position: center; /* This centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  font-family: 'Arial', sans-serif; /* Set a clean font */
+}
+
+/* Container for weather information */
+.container {
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white for better contrast */
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  margin: 2rem auto; /* Center container with automatic margins */
+  text-align: center;
+}
+
+/* Title style */
+h1 {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Search box styles */
+.search-box {
+  display: flex; /* Display elements in a row */
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center vertically */
+  gap: 1rem; /* Space between input and button */
+  margin-bottom: 1.5rem; /* Space below the search box */
+}
+
+/* Input styles */
+#city-input {
+  padding: 0.75rem;
+  width: 200px; /* Adjust width of input */
+  border: 1px solid #d5e5f0;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* Button styles */
+button, #go-back, #forecast-btn {
+  padding: 0.75rem 1.5rem; /* Add more padding for buttons */
+  background-color: #9cd0e4; /* Button background color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s; /* Smooth color transition */
+}
+
+button:hover, #go-back:hover, #forecast-btn:hover {
+  background-color: #86bcd4; /* Change color on hover */
+}
+
+/* Go Back button */
+#go-back {
+  position: buttom 0px;
+  top: 20px; /* Position Go Back at the top */
+  left: 20px; /* Align Go Back on the left */
+  z-index: 10; /* Ensure it is on top of other elements */
+}
+
+/* Forecast button */
+#forecast-btn {
+  position: fixed;
+  top: 20px; /* Align at the same height as Go Back */
+  left: 150px; /* Move it to the right of Go Back */
+  z-index: 10; /* Ensure it is on top of other elements */
+}
+
+/* Weather information */
+#weather-info {
+  margin-top: 1.5rem;
+  font-size: 1rem;
+}
+
+#city-name {
+  font-size: 1.5rem;
+  margin-bottom: 1rem; /* Added margin for spacing */
+}
+
+/* Paragraph styles */
+p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+/* Styles for forecast tables */
+#forecast-container {
+  display: grid; /* Use CSS Grid for layout */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid */
+  gap: 20px; /* Space between the tables */
+  margin-bottom: 20px; /* Space above the forecast tables */
+  padding: 1rem; /* Padding inside the forecast container */
+}
+
+/* Individual forecast item styles */
+.forecast-table {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  text-align: center; /* Center text within each forecast */
+  transition: transform 0.2s; /* Smooth transition effect */
+}
+
+.forecast-table:hover {
+  transform: scale(1.05); /* Scale up on hover for emphasis */
+}
+
+
+/* Date style */
+#date {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #ddd; /* This creates a line under the date */
+}
+
+.heart-icon {
+  color: rgb(226, 60, 60); /* Default color */
+  font-size: 24px; /* You can adjust the size */
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+
+.heart-icon:hover {
+  transform: scale(1.2);  /* Enlarge on hover for a nice effect */
+}
+.favorite-city-table {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+}
+
+
+.favorite-city-item {
+  border: 1px solid #ccc; /* Adds a light gray border */
+  border-radius: 8px; /* Rounds the corners of the box */
+  padding: 10px; /* Adds some space inside the box */
+  margin: 10px 0; /* Adds space between each city item */
+  background-color: #f9f9f9; /* Light background color */
+  transition: background-color 0.3s; /* Smooth transition for background color change */
+}
+
+.favorite-city-item {
+  border: 1px solid #ccc; /* Adds a light gray border */
+  border-radius: 8px; /* Rounds the corners of the box */
+  padding: 10px; /* Adds some space inside the box */
+  margin: 10px 0; /* Adds space between each city item */
+  background-color: #f9f9f9; /* Light background color */
+  transition: background-color 0.3s; /* Smooth transition for background color change */
+}
+
+.favorite-city-item:hover {
+  background-color: #e0f7fa; /* Changes background color on hover */
+}
+
+

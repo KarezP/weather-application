@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App - Page 1</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="search-box">
+        <input type="text" id="city-input" placeholder="Enter city name">
+        <button id="search-btn">Search</button>
+        <button id="current-location-btn">Use Current Location</button> <!-- Button for current location -->
+    </div>
+    
+    <div class="container">
+       <h2 id="city-name">City Name</h2> 
+        <p id="weather-info"></p>
+        <p id="temperature">Temperature</p>
+        <p id="description">Description</p>
+        <p id="humidity">Humidity</p>
+        <p id="wind-speed">Wind Speed</p>
+        <p id="date">Date</p>
+        <p id="time"></p>
+
+        <div id="heart-container"></div>
+    </div>
+
+    <button id="get-forecast" onclick="window.location.href='weather2.html'">Get Forecast</button>
+    <button id="my-favorite" onclick="window.location.href='weather3.html'">My Favorite</button>
+
+    <!-- Load the common JavaScript file -->
+    <script src="weather.js"></script>
+</body>
+</html>
+
