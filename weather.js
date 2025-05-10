@@ -1,5 +1,5 @@
 // ====================== API-nyckel ======================
-const geoApiKey = 'd3e65066212c46dea436eb2f4e3ccbcd';
+const geoApiKey = 'f0973e4b8cfe42c3bfc248c44384edb7';
 
 // ====================== DOMContentLoaded ======================
 document.addEventListener('DOMContentLoaded', () => {
