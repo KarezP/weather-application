@@ -65,59 +65,72 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Function to get city name from coordinates
-    async function getCityName(lat, lon) {
-        try {
-            const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${geoApiKey}`);
-            const data = await response.json();
-            
-            if (data.results.length > 0) {
-                return data.results[0].components.city || data.results[0].components.town || data.results[0].components.village || 'Unknown Location';
-            } else {
-                return 'Unknown Location';
-            }
-        } catch (error) {
-            console.error('Error fetching city name:', error);
+    
+// Function to get city name from coordinates
+async function getCityName(lat, lon) {
+    const geoApiKey = 'd3e65066212c46dea436eb2f4e3ccbcd'; // din OpenCage API-nyckel
+    try {
+        const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${geoApiKey}`);
+        const data = await response.json();
+
+        if (data.results.length > 0) {
+            const components = data.results[0].components;
+
+            console.log('Geocoding components:', components); // För felsökning i webbläsarens konsol
+
+            // Försök hämta platsnamn i denna ordning
+            return (
+                components.city ||
+                components.town ||
+                components.village ||
+                components.county ||
+                components.state ||
+                components.suburb ||
+                'Unknown Location'
+            );
+        } else {
+            console.warn('No results from geocoding API');
             return 'Unknown Location';
         }
+    } catch (error) {
+        console.error('Error fetching city name:', error);
+        return 'Unknown Location';
     }
+}
 
-    // Function to get weather by coordinates
-    async function getWeatherByCoordinates(lat, lon) {
-        try {
-            const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=auto`);
-            const data = await response.json();
-            const cityNameText = await getCityName(lat, lon);
-           
-            const weatherCode = data.current_weather.weathercode;
-            const weatherDescription = getWeatherDescription(weatherCode);
-            const windSpeedValue = data.current_weather.windspeed;
-            const humidityValue = data.current_weather.relative_humidity_2m || 'Not available';
+   // Function to get city coordinates
+async function getCoordinates(city) {
+    const geoApiKey = 'd3e65066212c46dea436eb2f4e3ccbcd'; // din OpenCage API-nyckel
 
-            if (cityName) {
-                cityName.textContent = `City: ${cityNameText}`;
-                temperature.textContent = `Temperature: ${Math.round(data.current_weather.temperature)}°C`;
-                description.textContent = `${weatherDescription}`;
-                windSpeed.textContent = `Wind Speed: ${Math.round(windSpeedValue)} m/s`;
-                humidity.textContent = `Humidity: ${humidityValue}% `;
-                date.textContent = `Date: ${new Date().toLocaleDateString()}`;
-                if (timeElement) {
-                    timeElement.textContent = `Time: ${new Date().toLocaleTimeString()}`; // Set the current time
-                }
-            }
+    try {
+        const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(city)}&key=${geoApiKey}`);
+        const data = await response.json();
 
-            // Clear the heart container and display the heart icon
-            if (heartContainer) {
-                heartContainer.innerHTML = '';  // Clear the heart container
-                displayCityNameWithHeart(cityNameText, lat, lon);  // Pass lat and lon for favorites
-            }
+        // Visa vad API:t returnerar (bra för felsökning)
+        console.log('Geocoding result:', data);
 
-            // Fetch 7-day forecast
-            getForecast(lat, lon, cityNameText);
-        } catch (error) {
-            alert(error.message);
+        // Kontrollera om vi fått några resultat
+        if (data.results.length > 0) {
+            const location = data.results[0].geometry;
+
+            // Logga den valda platsens lat/lon
+            console.log(`Coordinates for ${city}:`, location);
+
+            return {
+                lat: location.lat,
+                lon: location.lng
+            };
+        } else {
+            alert('Could not find the location. Please try another city.');
+            return null;
         }
+    } catch (error) {
+        console.error('Error fetching coordinates:', error);
+        alert('Something went wrong while fetching the location.');
+        return null;
     }
+}
+
 
     // Function to get 7-day forecast
     async function getForecast(lat, lon, cityNameText) {
